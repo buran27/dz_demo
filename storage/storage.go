@@ -5,11 +5,6 @@ import (
 	"os"
 )
 
-
-
-func NewStorage(){}
-
-
 func Read(name string) ([]byte, error){
 	file, err := os.ReadFile(name)
 	if err != nil{
