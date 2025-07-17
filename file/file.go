@@ -1,6 +1,6 @@
 package file
 
 
-func Read(){
-	
+func ReadAll(name string){
+
 }

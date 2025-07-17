@@ -1,6 +1,10 @@
 package bins
 
-import "time"
+import (
+	"encoding/json"
+	
+	"time"
+)
 
 
 type Bin struct{
@@ -8,6 +12,15 @@ type Bin struct{
 	Private bool `json:"private"`
 	CreatedAt time.Time `json:"createdAt"`
 	Name string	`json:"name"`
+}
+
+
+func (bin *Bin) ToBytes() ([]byte, error) {
+	acc, err := json.Marshal(bin)
+	if err != nil{
+		return nil, err
+	}
+	return acc, nil
 }
 
 type BinList struct{
