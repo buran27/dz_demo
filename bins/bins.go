@@ -2,7 +2,6 @@ package bins
 
 import (
 	"encoding/json"
-	
 	"time"
 )
 
