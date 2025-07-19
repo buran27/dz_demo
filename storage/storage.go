@@ -1,28 +1,38 @@
 package storage
 
 import (
+	"encoding/json"
 	"fmt"
+	"mineAPI/bins"
 	"os"
 )
 
-func Read(name string) ([]byte, error){
+func Read(name string) (*bins.Bin, error) {
+	var box *bins.Bin
 	file, err := os.ReadFile(name)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
-	return file, nil
+	err = json.Unmarshal(file, &box)
+	if err != nil {
+		return nil, err
+	}
+	return box, nil
 }
 
-
-func Write(name string, content []byte){
+func Write(name string, bin *bins.Bin) {
+	acc, err := json.Marshal(bin)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
 	file, err := os.Create(name)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
 	defer file.Close()
-	_, err = file.Write(content)
-	if err != nil{
+	_, err = file.Write(acc)
+	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
